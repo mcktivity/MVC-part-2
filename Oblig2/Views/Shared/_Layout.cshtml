@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body class="pt-3">
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <img class="navbar-brand" src="~/Images/logo.png" height="50">
+        <div class="mr-auto">
+            <div class="navbar-nav text-uppercase">
+                <a href="@Url.Action("About", "Oblig2")" class="nav-item nav-link">the project</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container m-auto border-right border-left" >
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - MadeWithMVC. WebApplikasjonStudent.</p>
+        </footer>
+    </div>
+
+
+</body>
+</html>

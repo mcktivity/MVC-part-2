@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Oblig2.Models.allMovies>
+
+@{
+    ViewBag.Title = "Movies";
+}
+
+<script type="text/javascript">
+
+    $(document).on("click", ".vidModal", function () {
+        var vidsrc = $(this).data('vid-url');
+        $('#trailer').attr('src', vidsrc);
+    });
+    $(document).on('hidden.bs.modal', function (e) {
+        var vidsrc = null;
+        $('#trailer').attr('src', vidsrc);
+    });
+    $(document).on("click", ".imgModal", function () {
+        var imgsrc = $(this).data('img-url');
+        $('#poster').attr('src', imgsrc);
+    });
+    $(document).ready(function () {
+        // lag en hendelse som utføres når en a-href med "data-SletteModal = true" trykkes.
+        $('a[data-details=true]').click(function () {
+
+            // hent inn data-taggene fra denne a-hef lenken
+            var title = $(this).data('title');
+            var year = $(this).data('year');
+            var plot = $(this).data('plot');
+            var dir = $(this).data('dir');
+
+            // legg ut dataene i div'en i modal-view'et
+            $('#title').html(title);
+            $('#year').html(year);
+            $('#plot').html(plot);
+            $('#dir').html(dir);
+        })
+    });
+</script>
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Accounts", "Oblig2" )" class="nav-item nav-link">Accounts</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Oblig2" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Movies", "Oblig2" )" class="nav-item nav-link">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Oblig2")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="my-2 col-md-12 col-sm-12">
+                <span class="font-weight-light text-uppercase" style="font-size: x-large">List of all downloadable movies</span>
+                <p class="text-info text-uppercase">
+                    To view the movie details, click the movie's poster. To add a new Movie, @Html.ActionLink("Click Here.", "NewMovie", new { tom = "" }, new { @class = "text-danger" })
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                @Html.Partial("MovieItem", item)
+            }
+        </div>
+    </div>
+</div>
+@Html.Partial("Details")
+@Html.Partial("Trailer")

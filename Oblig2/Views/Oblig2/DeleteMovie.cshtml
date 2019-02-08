@@ -1,0 +1,63 @@
+﻿@model Oblig2.Models.allMovies
+
+@{
+    ViewBag.Title = "DeleteMovie";
+}
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Accounts", "Oblig2" )" class="nav-item nav-link">Accounts</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Oblig2" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Movies", "Oblig2" )" class="nav-item nav-link">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Oblig2")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-10 mx-auto">
+            @using (Html.BeginForm())
+            {
+
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="row">
+                        <div class="my-2 col-md-10 col-sm-12 mx-auto ">
+                            <span class="font-weight-light text-uppercase text-danger mx-auto" style="font-size: xx-large">Delete this movie?</span>
+                        </div>
+                        <div class="card col-sm-12 col-md-10 p-0 mx-auto">
+                            <div class="card-header">
+                                @Model.title (@Model.year)
+                            </div>
+                            <div class="card-body">
+                                <img src="@Url.Content(@Model.imgurl)" class="float-left mx-4 my-2" />
+                                <p class="card-text text-justify">@Model.plot <br /><br /> Directed by: @Model.dir</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="col-sm-12">
+                                    <input type="submit" value="Delete" class="col-sm-12 col-md-5 btn btn-sm btn-danger font-weight-light text-uppercase my-1" />
+                                    <a href="@Url.Action("Movies", "Oblig2")" class="col-sm-12 col-md-4 btn btn-sm btn-dark font-weight-light text-uppercase text-center my-1">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

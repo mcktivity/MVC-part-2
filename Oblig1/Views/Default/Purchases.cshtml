@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Oblig1.Models.Purchases>
+
+@{
+    ViewBag.Title = "Purchases";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Create an event that will trigger when a-ref with data-deleteModal = "true" is clicked
+        $('a[data-deleteModal=true]').click(function () {
+
+            // get data from data-tags
+            var title = $(this).data('title');
+            var price = $(this).data('price');
+            var date = $(this).data('date');
+            var data_id = $(this).data('id');
+
+            // display data in modal
+            $('#title').html(title);
+            $('#price').html(price);
+            $('#date').html(date);
+
+            // delete button event
+            $("#deleteBTN").click(function () {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Default")',
+                    data: { id: data_id },
+                    success: function () {
+                        // Reload Orders-page to show new list
+                        $.ajax({
+                            url: '@Url.Action("Purchases", "Default")',
+                            success: function () {
+                                window.location.reload();
+                            }
+                        });
+                        }
+                    });
+                })
+            })
+        });
+</script>
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Default" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Account", "Default" )" class="nav-item nav-link">Account</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Default")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<hr />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 text-black-50">
+            <div class="my-2">
+                <span class="font-weight-light text-uppercase" style="font-size: xx-large">Purchase history</span><br />
+            </div>
+            <table class="table table-hover">
+                <thead class="text-uppercase">
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Movie</th>
+                        <th scope="col">Price (NOK)</th>
+                        <th scope="col">Date Downloaded</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@Html.DisplayFor(model => item.PId)</th>
+                            <td>@Html.DisplayFor(model => item.Title)</td>
+                            <td>@Html.DisplayFor(model => item.Price)</td>
+                            <td>@Html.DisplayFor(model => item.DateBought)</td>
+                            <td>
+                                <a href="#Delete" class="btn btn-outline-danger btn-sm"
+                                   data-title="@item.Title"
+                                   data-price="@item.Price"
+                                   data-date="@item.DateBought"
+                                   data-id="@item.PId" data-toggle="modal" data-deleteModal="true">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("Delete")

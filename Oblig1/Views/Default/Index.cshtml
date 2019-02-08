@@ -1,0 +1,105 @@
+﻿@model Oblig1.Models.UserAccount
+
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    $(function () {
+        $('.carousel').carousel({
+            interval: 3000
+        });
+    });
+</script>
+
+<hr />
+
+<div class="container-fluid pt-3 text-uppercase font-weight-light">
+    <div class="row">
+        <div class="col-lg-5 col-md-6 offset-lg-1">
+            <div class="carousel slide my-4" id="carousel-46478">
+                <ol class="carousel-indicators">
+                    <li data-slide-to="0" data-target="#carousel-46478" class="active">
+                    </li>
+                    <li data-slide-to="1" data-target="#carousel-46478">
+                    </li>
+                    <li data-slide-to="2" data-target="#carousel-46478">
+                    </li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active w-auto">
+                        <img class="d-block w-100 justify-content-center" alt="mission impossible fallout 2018 poster" src="https://static2.showtimes.com/gallery/660x350/mission-impossible-fallout-129021.jpg" />
+                    </div>
+                    <div class="carousel-item w-auto">
+                        <img class="d-block w-100 justify-content-center" alt="Rampage 2018 poster" src="https://static1.showtimes.com/gallery/660x350/rampage-125990.jpg" />
+                    </div>
+                    <div class="carousel-item w-auto">
+                        <img class="d-block w-100 justify-content-center" alt="Dead pool 2 poster" src="https://static2.showtimes.com/gallery/660x350/deadpool-2-126813.jpg" />
+                    </div>
+                </div> <a class="carousel-control-prev" href="#carousel-46478" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-46478" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
+            </div>
+
+        </div>
+        <div class="col-lg-5 col-md-6">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal col-sm-12 mt-4">
+
+                    <div class="form-group">
+                        <div class="col-sm-12 text-uppercase text-secondary">
+                            <p style="font-size:large" align="right">
+                                “Books and movies are like apples and oranges. They both are fruit, but taste completely different.”<br />
+                                <span class="text-info" style="font-size:smaller">- stephen king</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <div class="col-sm-12 mt-2 ">
+                            <span style="font-size:xx-large">Sign in</span>
+                            <p class="blockquote" style="font-size:medium">
+                                Not a member yet?@Html.ActionLink(" Sign up now!", "Register")
+                            </p>
+                            <hr />
+                        </div>
+                    </div>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            <a class="close" data-dismiss="alert">×</a>
+                            @Html.ValidationSummary(true, "Wrong password or Account does not exist.", new { @class= "text-danger text-lowercase"})
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label", @style = "font-size:small" })
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control col-sm-12" } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger", @style = "font-size:small" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label", @style = "font-size:small" })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control col-sm-12" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @style = "font-size:small" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="submit" value="Sign in" class="btn btn-block btn-dark font-weight-light text-uppercase col-sm-12" style="font-size:medium" />
+                            <a href="@Url.Action("Register", "Default")" class="btn btn-block btn-outline-info btn-sm my-1" style="font-size:medium">Sign up for free!</a>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

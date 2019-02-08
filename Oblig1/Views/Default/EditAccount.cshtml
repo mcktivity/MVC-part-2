@@ -1,0 +1,115 @@
+﻿@model Oblig1.Models.UserAccount
+
+@{
+                /**/
+
+                ViewBag.Title = "EditAccount";
+}
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Default" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Account", "Default" )" class="nav-item nav-link">Account</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Default")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<hr />
+
+<div class="container-fluid text-uppercase font-weight-light">
+    <div class="row">
+        <div class="col-md-8 col-sm-12 mx-auto">
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-12 text-uppercase font-weight-light">
+                    <span class="font-weight-light text-uppercase" style="font-size: xx-large">Account details</span>
+                </div>
+
+                <hr />
+
+                @Html.AntiForgeryToken()
+
+                <div class="container">
+                    <div class="row">
+                        <div class="form-horizontal col-md-6 p-0">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @Value = @Session["Username"].ToString(), @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @Value = @Session["Password"].ToString() } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @Value = @Session["ConfirmPassword"].ToString() } })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.UID, new { htmlAttributes = new { @class = "form-control col-sm-12", @Value = @Session["UID"].ToString(), @readonly = "readonly", style = "display:none" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal col-md-6 p-0">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @Value = @Session["FirstName"].ToString() } })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @Value = @Session["LastName"].ToString() } })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @Value = @Session["Email"].ToString() } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12 ml-auto">
+                                    <input type="submit" value="Save changes" class="btn btn-sm btn-dark font-weight-light text-uppercase" />
+                                    <a href="@Url.Action("Account", "Default")" class="btn btn-sm btn-outline-danger mx-1">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

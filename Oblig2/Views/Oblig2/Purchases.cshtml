@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Oblig2.Models.allPurchases>
+
+@{
+    ViewBag.Title = "Purchases";
+}
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Accounts", "Oblig2" )" class="nav-item nav-link">Accounts</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Oblig2" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Movies", "Oblig2" )" class="nav-item nav-link">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Oblig2")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="my-2 col-md-12 col-sm-12">
+                <span class="font-weight-light text-uppercase" style="font-size: xx-large">List of all purchases made</span>
+                <p class="text-info text-uppercase">
+                    This list of purchases also includes those from deactivated accounts.
+                </p>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="text-uppercase text-black-50">
+                        <tr>
+                            <th scope="col">Movie Title</th>
+                            <th scope="col">Price(NOK)</th>
+                            <th scope="col">Buyer's account</th>
+                            <th scope="col">Date Bought</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => item.title)</td>
+                                <td>@Html.DisplayFor(model => item.price)</td>
+                                <td>@Html.DisplayFor(model => item.username)</td>
+                                <td>@Html.DisplayFor(model => item.datebought)</td>
+                                <td>
+                                    @Html.ActionLink("Delete", "DeletePurchase", new { id = item.pid }, new { @class = "btn btn-outline-danger btn-sm btn-block my-1" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

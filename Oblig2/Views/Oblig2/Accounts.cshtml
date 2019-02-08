@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Oblig2.Models.Accounts>
+
+@{
+    ViewBag.Title = "Accounts";
+}
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Accounts", "Oblig2" )" class="nav-item nav-link">Accounts</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Oblig2" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Movies", "Oblig2" )" class="nav-item nav-link">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Oblig2")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="my-2 col-md-12 col-sm-12">
+                <span class="font-weight-light text-uppercase" style="font-size: xx-large">List of all registered accounts </span>
+                <p class="text-info text-uppercase">
+                    This list includes all type of accounts: admins, clients and deactivated accounts. <br />
+                    Admin accounts can also be used in Oblig1.
+                    To add a new account, @Html.ActionLink("Click Here.", "Register", new { tom = "" }, new { @class = "text-danger" })
+                </p>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="text-capitalize text-black-50">
+                        <tr>
+                            <th scope="col">Username</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Date Registered</th>
+                            <th scope="col">Admin</th>
+                            <th scope="col">Deactivated</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => item.username)</td>
+                                <td>@Html.DisplayFor(model => item.password)</td>
+                                <td>@Html.DisplayFor(model => item.firstname) @Html.DisplayFor(model => item.lastname)</td>
+                                <td>@Html.DisplayFor(model => item.email)</td>
+                                <td>@Html.DisplayFor(model => item.dateregistered)</td>
+                                <td align="center">@Html.DisplayFor(model => item.isadmin)</td>
+                                <td align="center">@Html.DisplayFor(model => item.isdeleted)</td>
+                                <td align="center">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.uid }, new { @class = "btn btn-outline-info btn-sm btn-block my-1" })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.uid }, new { @class = "btn btn-outline-danger btn-sm btn-block my-1" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

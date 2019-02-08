@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Oblig1.Models.UserAccount>
+
+@{
+    ViewBag.Title = "Account";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Create an event that will trigger when a-ref with data-deleteModal = "true" is clicked
+        $('a[data-deleteModal=true]').click(function () {
+
+            // get data from data-tags
+            var data_id = $(this).data('id');
+            var title = $(this).data('title');
+
+            // show
+            $('#title').html(title);
+
+            // delete button event
+            $("#deleteBTN").click(function () {
+                $.ajax({
+                    url: '@Url.Action("DeleteUser", "Default")',
+                    data: { id: data_id },
+                    success: function () {
+                        // User must log out
+                        $.ajax({
+                            url: '@Url.Action("LogOut", "Default")',
+                            success: function () {
+                                window.location.reload();
+                            }
+                        });
+                        }
+                    });
+                })
+            })
+        });
+</script>
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" 
+            data-toggle="collapse" data-target="#navbarNavAltMarkup" 
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" 
+            aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Default" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Account", "Default" )" class="nav-item nav-link">Account</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Default")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<hr />
+
+<div class="container-fluid text-uppercase font-weight-light">
+    <div class="row">
+        <div class="col-md-8 col-sm-12 mx-auto">
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-12 text-uppercase font-weight-light">
+                    <span class="font-weight-light text-uppercase" style="font-size: xx-large">Account details</span>
+                </div>     
+
+                <hr />
+
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    @foreach (var item in Model)
+                    {
+                        <div class="row">
+                            <div class="form-horizontal col-md-6">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(modelItem => item.Username, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.Username, new { htmlAttributes = new { @class = "form-control col-md-12", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(modelItem => item.Email, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.Email, new { htmlAttributes = new { @class = "form-control col-md-12", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-horizontal col-md-6">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(modelItem => item.FirstName, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.FirstName, new { htmlAttributes = new { @class = "form-control col-md-12", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(modelItem => item.LastName, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(modelItem => item.LastName, new { htmlAttributes = new { @class = "form-control col-md-12", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <a href="@Url.Action("EditAccount", "Default" , new { id=item.UID})" class="btn btn-sm btn-dark">Edit Account and Password </a>
+                                        <a href="#Delete" class="btn btn-sm btn-outline-danger my-1"
+                                           data-title="@item.Username"
+                                           data-id="@item.UID" data-toggle="modal" 
+                                           data-deleteModal="true">Delete Account</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@Html.Partial("Delete")

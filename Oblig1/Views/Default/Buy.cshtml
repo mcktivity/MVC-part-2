@@ -1,0 +1,99 @@
+﻿@model Oblig1.Models.Purchases
+
+@{
+    ViewBag.Title = "Buy";
+}
+<script type="text/javascript">
+    $(function () {
+        $('.carousel').carousel({
+            interval: 3000
+        });
+    });
+</script>
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Default" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Account", "Default" )" class="nav-item nav-link">Account</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Default")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<hr />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+        </div>
+        <div class="col-lg-6 col-md-6">
+
+            @using (Html.BeginForm(new { id = "frmsave" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal col-md-12 col-sm-12 ">
+
+                    <div class="form-group">
+                        <div class="col-md-12 text-uppercase font-weight-light">
+                            <span style="font-size:xx-large" class="text-info">No worries!</span>
+                            <p style="font-size: smaller">
+                                in case of download failure, refund will be made.
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control col-sm-12 font-weight-bold text-uppercase", @Value = @Session["Title"].ToString(), @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control col-sm-12 font-weight-bold text-uppercase", @Value = @Session["Price"].ToString(), @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control col-sm-12 ", @Value = @Session["Username"].ToString(), @readonly = "readonly", style = "display:none" } })
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        <div class="col-md-12 font-weight-light text-uppercase" style="font-size: smaller">
+                            By clicking <span class="text-info">Download</span>, you agree to our <span class="text-info">Terms and Conditions</span> and that you have read our Data Use Policy, including our Cookie Use.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Download" class="btn btn-block btn-dark font-weight-light text-uppercase col-sm-12" />
+                            <a href="@Url.Action("Dashboard", "Default")" class="btn btn-block btn-outline-danger btn-sm font-weight-light text-uppercase my-1" style="font-size:small">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-lg-3">
+        </div>
+    </div>
+</div>

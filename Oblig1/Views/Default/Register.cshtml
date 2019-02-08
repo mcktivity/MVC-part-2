@@ -1,0 +1,104 @@
+﻿@model Oblig1.Models.UserAccount
+
+@{
+    ViewBag.Title = "Register";
+}
+<script type="text/javascript">
+    $(function () {
+        $('.carousel').carousel({
+            interval: 3000
+        });
+    });
+</script>
+
+<div class="container-fluid text-uppercase font-weight-light py-5">
+    <div class="row">
+        <div class="col-md-8 col-sm-12 mx-auto">
+            @using (Html.BeginForm())
+            {
+
+                <div class="col-md-12 mt-3 text-uppercase font-weight-light">
+                    <span style="font-size:xx-large ">Sign Up for free</span>
+                    <p style="font-size: small">
+                        Already a member?@Html.ActionLink(" Sign in", "Index")
+                    </p>
+                </div>
+
+                <hr />
+
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="row">
+                        <div class="form-horizontal col-md-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-horizontal col-md-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12 font-weight-light text-uppercase text-justify" style="font-size: smaller">
+                                    By clicking <span class="text-info">sign up</span>, you agree to our <span class="text-info">Terms and Conditions</span> and that you have read our Data Use Policy, including our Cookie Use.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12 align-content-center">
+                                    <input type="submit" value="Sign up" class="float-right btn btn-sm btn-dark font-weight-light text-uppercase" />
+                                    <a href="@Url.Action("Index", "Default")" class="float-right btn btn-sm btn-outline-danger mx-1">Back to Sign in</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

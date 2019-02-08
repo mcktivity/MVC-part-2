@@ -1,0 +1,82 @@
+﻿@model Oblig2.Models.Accounts
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<hr />
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mt-5">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ml-auto text-uppercase">
+            <li class="nav-item">
+                <a href="@Url.Action("Accounts", "Oblig2" )" class="nav-item nav-link">Accounts</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Purchases", "Oblig2" )" class="nav-item nav-link">Purchases</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Movies", "Oblig2" )" class="nav-item nav-link">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("LogOut", "Oblig2")" class="nav-item nav-link">Log out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-lg-10 mx-auto">
+            @using (Html.BeginForm())
+            {
+
+                @Html.AntiForgeryToken()
+                <div class="container">
+                    <div class="row">
+                        <div class="my-2 col-md-8 col-sm-12 mx-auto">
+                            <span class="font-weight-light text-uppercase text-danger" style="font-size: xx-large">Delete this account?</span>
+                        </div>
+                        <div class="my-2 col-md-8 col-sm-12 mx-auto">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control col-md-12", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.dateregistered, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.dateregistered, new { htmlAttributes = new { @class = "form-control col-md-12", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.dateregistered, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-12 font-weight-light text-uppercase", @style = "font-size:small" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control col-md-12", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger font-weight-light text-uppercase", @style = "font-size:small" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.ActionLink("Back", "Accounts", new { tom = "" }, new { @class = "float-right col-sm-12 col-md-5 btn btn-sm btn-dark font-weight-light text-uppercase m-1" })
+                                    <input type="submit" value="Delete" class="float-right col-sm-12 col-md-5 btn btn-sm btn-danger font-weight-light text-uppercase m-1" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

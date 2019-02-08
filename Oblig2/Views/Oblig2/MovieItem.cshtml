@@ -1,0 +1,24 @@
+﻿@model Oblig2.Models.allMovies
+
+<div class="card m-2 font-weight-light text-uppercase mx-auto" style="width: 12rem;">
+    <a class="imgModal" style=" font-size:smaller"
+       data-title="@Model.title"
+       data-year="@Model.year"
+       data-plot="@Model.plot"
+       data-dir="@Model.dir"
+       data-img-url="@Url.Content(Model.imgurl)"
+       data-toggle="modal"
+       data-details="true" data-target="#Details">
+        <img src="@Url.Content(@Model.imgurl)" class="card-img-top" title="Click for more info"/>
+    </a>
+    
+    <div class="card-body p-1">
+        <a href="@Url.Action("EditMovie", "Oblig2" , new { id=@Model.mid})" class="btn btn-block btn-dark">Edit</a>
+        <a href="@Url.Action("DeleteMovie", "Oblig2", new { id = @Model.mid})" class="btn btn-block btn-sm btn-outline-danger text-danger">Delete</a>
+        <a class="btn btn-block btn-sm btn-outline-info text-info vidModal" style=" font-size:smaller"
+           data-vid-url="@Url.Content(Model.vidurl)"
+           data-toggle="modal"
+           data-target="#Trailer">Watch trailer</a>
+
+    </div>
+</div>     

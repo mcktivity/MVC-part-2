@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Oblig1.Models.Movie>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<script type="text/javascript">
+
+    $(document).on("click", ".vidModal", function () {
+        var vidsrc = $(this).data('vid-url');
+        $('#trailer').attr('src', vidsrc);
+    });
+    $(document).on('hidden.bs.modal', function (e) {
+        var vidsrc = null;
+        $('#trailer').attr('src', vidsrc);
+    });
+    $(document).on("click", ".imgModal", function () {
+        var imgsrc = $(this).data('img-url');
+        $('#poster').attr('src', imgsrc);
+    });
+    $(document).ready(function () {
+        // lag en hendelse som utføres når en a-href med "data-SletteModal = true" trykkes.
+        $('a[data-details=true]').click(function () {
+
+            // hent inn data-taggene fra denne a-hef lenken
+            var title = $(this).data('title');
+            var year = $(this).data('year');
+            var plot = $(this).data('plot');
+            var dir = $(this).data('dir');
+
+            // legg ut dataene i div'en i modal-view'et
+            $('#title').html(title);
+            $('#year').html(year);
+            $('#plot').html(plot);
+            $('#dir').html(dir);
+        })
+    });
+</script>
+
+<hr />
+
+<div class="container-fluid py-5">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            @Html.Partial("MovieItem", item)
+        }
+    </div>
+</div>
+
+@Html.Partial("Details")
+@Html.Partial("Trailer")
+
+
+
+

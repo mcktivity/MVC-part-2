@@ -1,0 +1,23 @@
+﻿@model Oblig1.Models.Movie
+
+<div class="card m-2 font-weight-light text-uppercase mx-auto" style="width: 12rem;">
+    <a class="imgModal" style=" font-size:smaller"
+       data-title="@Model.Title"
+       data-year="@Model.Year"
+       data-plot="@Model.Plot"
+       data-dir="@Model.Dir"
+       data-img-url="@Url.Content(Model.ImgUrl)"
+       data-toggle="modal"
+       data-details="true" data-target="#Details">
+        <img src="@Url.Content(@Model.ImgUrl)" class="card-img-top" title="Click for more info"/>
+    </a>
+    
+    <div class="card-body p-1">
+        <a href="@Url.Action("Buy", "Default", new { id = @Model.MId})" class="btn btn-block btn-dark">Buy for @Model.Price NOK</a>
+        <a class="btn btn-block btn-sm btn-outline-info text-info vidModal" style=" font-size:smaller"
+           data-vid-url="@Url.Content(Model.VidUrl)"
+           data-toggle="modal"
+           data-target="#Trailer">Watch trailer</a>
+
+    </div>
+</div>     
